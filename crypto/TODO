@@ -1,0 +1,5 @@
+[ ] Function to read a file to char *
+[ ] Function that creates an RSA pointer from a char *
+[ ] Main entrypoint for argument parsing.
+
+
