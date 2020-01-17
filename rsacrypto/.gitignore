@@ -1,0 +1,9 @@
+keys/
+files/
+bin/
+lib/
+gtmobj/
+obj/
+
+*.o
+*.so

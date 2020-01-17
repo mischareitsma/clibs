@@ -27,3 +27,10 @@ size_t read_file(char **content, char *filelocation)
 
 	return size;
 }
+
+void write_file(char *content, size_t content_size, char *filelocation)
+{
+	FILE *fp = fopen(filelocation, "wb");
+	fwrite(content, sizeof(char), content_size, fp);
+	fclose(fp);
+}

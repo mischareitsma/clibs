@@ -3,10 +3,12 @@
 mkdir -p keys
 rm keys/*
 openssl req -new -x509 -newkey rsa:2048 -days 365 -keyout keys/key.pem \
-    -out keys/cert.pem -nodes -subj '/C=NL/ST=Flevoland/L=Almere/CN=www.mreitsma.com' > /dev/null
+    -out keys/cert.pem -nodes \
+    -subj '/C=NL/ST=Flevoland/L=Almere/CN=www.mreitsma.com' > /dev/null
 openssl x509 -pubkey -noout -in keys/cert.pem  > keys/pubkey.pem
 
 mkdir -p files
+rm files/*
 
 cat <<-EOF > files/sample.txt
 This is an example file used for the crypto lib.
