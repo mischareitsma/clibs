@@ -92,20 +92,20 @@ int main(int argc, char *argv[])
 		if (!outfile)
 			return error("Missing required option -o", 1);
 
-		int result_size = encrypt((unsigned char*)key_content,
-					  (unsigned char*)input_content,
-					  input_size,
-					  (unsigned char*)result);
+		int result_size = rc_encrypt((unsigned char*)key_content,
+					     (unsigned char*)input_content,
+					     input_size,
+					     (unsigned char*)result);
 					
 		write_file(result, result_size, outfile);
 	}
 
 	if (action == DECRYPT) {
 
-		int result_size = decrypt((unsigned char *)key_content,
-					  (unsigned char *)input_content,
-					  input_size,
-					  (unsigned char *)result);
+		int result_size = rc_decrypt((unsigned char *)key_content,
+					     (unsigned char *)input_content,
+					     input_size,
+					     (unsigned char *)result);
 
 		if (!outfile)
 			printf("%s\n", result);
@@ -117,9 +117,9 @@ int main(int argc, char *argv[])
 		if (!outfile)
 			return error("Missing required option -o", 1);
 
-		size_t sign_size = sign((unsigned char *)key_content,
-					(unsigned char *)input_content,
-					input_size, (unsigned char *)result);
+		size_t sign_size = rc_sign((unsigned char *)key_content,
+					   (unsigned char *)input_content,
+					   input_size, (unsigned char *)result);
 
 		if (sign_size > 0)
 			write_file(result, sign_size, outfile);
@@ -136,10 +136,10 @@ int main(int argc, char *argv[])
 		if (!signature_content)
 			return error("Could not read signature file", 3);
 
-		int verified = verify((unsigned char *)key_content,
-				      (unsigned char *)signature_content,
-				      sign_size, (unsigned char *)input_content,
-				      input_size);
+		int verified = rc_verify((unsigned char *)key_content,
+					 (unsigned char *)signature_content,
+					 sign_size, (unsigned char *)input_content,
+					 input_size);
 		
 		if (verified)
 			printf("Verify OK\n");

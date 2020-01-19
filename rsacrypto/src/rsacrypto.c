@@ -18,7 +18,7 @@
 
 RSA *create_rsa_key(const unsigned char *key, const bool is_public);
 
-size_t encrypt(const unsigned char *key, const unsigned char *input,
+size_t rc_encrypt(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *result)
 {
 	RSA *rsa = create_rsa_key(key, true);
@@ -34,7 +34,7 @@ size_t encrypt(const unsigned char *key, const unsigned char *input,
 	return size;
 }
 
-size_t decrypt(const unsigned char *key, const unsigned char *input,
+size_t rc_decrypt(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *result)
 {
 	RSA *rsa = create_rsa_key(key, false);
@@ -50,7 +50,7 @@ size_t decrypt(const unsigned char *key, const unsigned char *input,
 	return size;
 }
 
-size_t sign(const unsigned char *key, const unsigned char *input,
+size_t rc_sign(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *signature)
 {
 	
@@ -100,7 +100,7 @@ size_t sign(const unsigned char *key, const unsigned char *input,
 	return sign_len;
 }
 
-bool verify(const unsigned char *key, const unsigned char *signature,
+bool rc_verify(const unsigned char *key, const unsigned char *signature,
 			const size_t signature_size, const unsigned char *input,
 			const size_t input_size)
 {

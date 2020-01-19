@@ -15,8 +15,8 @@ GTM_OBJ_DIR = gtmobj
 # Compiler info and inputs
 CC = gcc
 
-INC_PATH = -I./src -I/usr/include/openssl
-LIB_PATH = -L./lib
+INC_PATH = -I./src -I/usr/include/openssl -I/usr/local/opt/openssl@1.1/include
+LIB_PATH = -L./lib -L/usr/local/opt/openssl@1.1/lib
 
 CFLAGS = -Wall -Werror
 LFLAGS = -lcrypto
@@ -39,7 +39,7 @@ GTM_INCLUDES := $(wildcard $(GTM_SRC_DIR)/*.h)
 GTM_OBJECTS  := $(patsubst $(GTM_SRC_DIR)/%.c, $(GTM_OBJ_DIR)/%.o, $(GTM_SOURCES))
 
 # Default will be creating an executable using the orignal C sources
-$(BIN_DIR)/$(TARGET): $(SOURCES) $(INCLUDES) $(BIN_DIR)
+$(BIN_DIR)/$(TARGET): $(SOURCES) $(INCLUDES) $(BIN_DIR) $(LIB_DIR)
 	$(CC) $(LIB_PATH) $(INC_PATH) $(SOURCES) -o $@ $(LFLAGS)
 
 # Creation of the object files for the pure C components

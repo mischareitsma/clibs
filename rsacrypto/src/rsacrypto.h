@@ -6,16 +6,16 @@
 
 // TODO: Docs?
 
-size_t encrypt(const unsigned char *key, const unsigned char *input,
+size_t rc_encrypt(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *result);
 			
-size_t decrypt(const unsigned char *key, const unsigned char *input,
+size_t rc_decrypt(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *result);
 
-size_t sign(const unsigned char *key, const unsigned char *input,
+size_t rc_sign(const unsigned char *key, const unsigned char *input,
 			const size_t input_size, unsigned char *signature);
 
-bool verify(const unsigned char *key, const unsigned char *signature,
+bool rc_verify(const unsigned char *key, const unsigned char *signature,
 			const size_t signature_size, const unsigned char *input,
 			const size_t input_size);
 
