@@ -76,3 +76,6 @@ all: $(BIN_DIR)/$(TARGET) clib gtmlib
 
 clean:
 	rm -rf $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR) $(GTM_OBJ_DIR)
+
+docker-image:
+	docker build -t fis-gtm-rsacrypto:latest .
