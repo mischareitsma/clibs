@@ -32,7 +32,8 @@ int int_array_add(IntArray *array, int i)
 
 void int_array_print(IntArray *array, int print_option)
 {
-	printf("IntArray with max size %d, and current size %d\n\n", array->max, array->size);
+	printf("IntArray with max size %d, and current size %d\n\n",
+		array->max, array->size);
 	for(int i = 0; i < array->size; i++) {
 		printf("Element %d: %d\n", i, array->elements[i]);
 	}
@@ -51,7 +52,7 @@ int int_array_remove(IntArray *array, int index)
 	/*
 	index     | 0 | 1 | 2 | 3 | 4 | 5
 	value old | 6 | 9 | 4 | 1 | 5 | X
-	value new | 0 | 1 | 3 | 5 | X | X
+	value new | 6 | 9 | 1 | 5 | X | X
 
 	- size = 5
 	- index = 2
