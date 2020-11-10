@@ -7,8 +7,6 @@ TARGET_LIB_NAME = liblogging.so
 TARGET_LIB      = $(TARGET_LIB_NAME).$(VERSION)
 TARGET_TEST     = test_logging
 
-VERSION = 0.0.1
-
 # Directories
 SRC_DIR  = src
 TEST_DIR = test

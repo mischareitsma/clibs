@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "log.h"
+#include "logging.h"
 
 
 void run_log_msg_test();

@@ -1,5 +1,5 @@
 #include "ansi.h"
-#include "log.h"
+#include "logging.h"
 
 #include <stdio.h>
 #include <time.h>

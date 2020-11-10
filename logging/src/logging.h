@@ -1,5 +1,5 @@
-#ifndef __LOG_H__
-#define __LOG_H__
+#ifndef __LOGGING_H__
+#define __LOGGING_H__
 
 #include <stdarg.h>
 #include <time.h>
@@ -52,4 +52,4 @@ void log_event_to_file(FILE *f, struct log_event *event);
 #define log_error_to_file(f, ...) log_msg_to_file(f, LOG_ERROR, __FILE__, __LINE__, __VA_ARGS__)
 #define log_fatal_to_file(f, ...) log_msg_to_file(f, LOG_FATAL, __FILE__, __LINE__, __VA_ARGS__)
 
-#endif /* __LOG_H__ */
+#endif /* __LOGGING_H__ */
