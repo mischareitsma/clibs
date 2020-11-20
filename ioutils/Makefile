@@ -1,26 +1,30 @@
-# VERSION
+# Version info
+
 VERSION = 0.0.1
 
-# Target executable and library names
-TARGET          = logging
-TARGET_LIB_NAME = lib$(TARGET).so
-TARGET_LIB      = $(TARGET_LIB_NAME).$(VERSION)
-TARGET_TEST     = test_$(TARGET)
+# Target executables etc.
 
-# Directories
+TARGET = ioutils
+TARGET_LIB_NAME = lib$(TARGET).so
+TARGET_LIB = $(TARGET_LIB_NAME).$(VERSION)
+
+TARGET_TEST = test_$(TARGET)
+
+# Directories:
+
 SRC_DIR  = src
 TEST_DIR = test
 LIB_DIR  = lib
 BIN_DIR  = bin
 OBJ_DIR  = obj
 
-# TODO: look at auto-make and configure scripts
 INCUDE_INSTALL_DIR  = /usr/local/include
 LIBRARY_INSTALL_DIR = /usr/local/lib
 
-# Compiler info and inputs
+# Binaries
 CC = gcc
 
+# Compiler and Linker options
 INCLUDE_DIRS = -I$(SRC_DIR) -I$(TEST_DIR)
 LIBRARY_DIRS = 
 CFLAGS = -Wall -Werror
@@ -42,7 +46,6 @@ install: $(LIB_DIR)/$(TARGET_LIB) $(INCLUDES)
 	cp $(LIB_DIR)/$(TARGET_LIB) $(LIBRARY_INSTALL_DIR)
 	ln -sf $(LIBRARY_INSTALL_DIR)/$(TARGET_LIB) $(LIBRARY_INSTALL_DIR)/$(TARGET_LIB_NAME)
 
-
 $(BIN_DIR)/$(TARGET_TEST): $(SOURCES) $(TEST_SOURCES) $(INCLUDES) $(BIN_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIRS) $(SOURCES) $(TEST_SOURCES) -o $(BIN_DIR)/$(TARGET_TEST)
 
@@ -61,4 +64,3 @@ $(LIB_DIR):
 clean:
 	rm -rf $(BIN_DIR)
 	rm -rf $(LIB_DIR)
-	rm -rf example.log
