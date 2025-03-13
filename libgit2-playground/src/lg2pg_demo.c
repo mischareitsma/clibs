@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 void error(int error_code);
+void print_parents(git_commit *commit);
 
 void demo_libgit2(const char* const repo_location) {
 	git_libgit2_init();
@@ -33,6 +34,9 @@ void demo_libgit2(const char* const repo_location) {
 	printf("The message of the HEAD commit:\n%s\n\n", message);
 	printf("The summary of the HEAD commit:\n%s\n\n", summary);
 
+	printf("Going to walk through commits form HEAD to end.\n");
+	print_parents(commit);
+
 	git_libgit2_shutdown();
 }
 
@@ -41,4 +45,36 @@ void error(int error_code)
 	const git_error *err = git_error_last();
 	printf("Error %d%d: %s\n", error_code, err->klass, err->message);
 	exit(error_code);
+}
+
+void print_parents(git_commit *commit) {
+	const git_oid *oid = git_commit_id(commit);
+	char shortsha[10] = {0};
+	git_oid_tostr(shortsha, 9, oid);
+
+	const char *commit_summary = git_commit_summary(commit);
+
+	printf("Commit (%s): %s\n", shortsha, commit_summary);
+
+	unsigned int count = git_commit_parentcount(commit);
+
+	git_commit *commits[count];
+
+	for (unsigned int i=0; i < count; i++) {
+		const git_oid *parent_oid = git_commit_parent_id(commit, i);
+		git_commit *parent = NULL;
+		int error_code = git_commit_parent(&parent, commit, i);
+		if (error_code < 0) error(error_code);
+
+		commits[i] = parent;
+
+		git_oid_tostr(shortsha, 9, parent_oid);
+		const char *parent_summary = git_commit_summary(parent);
+		printf("Parent commit(%s): %s\n", shortsha, parent_summary);
+	}
+	printf("\n");
+
+	for (unsigned int i = 0; i < count; i++) {
+		print_parents(commits[i]);
+	}
 }
