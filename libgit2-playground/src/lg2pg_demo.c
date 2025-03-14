@@ -20,6 +20,18 @@ void demo_libgit2(const char* const repo_location) {
 	error_code = git_reference_name_to_id(&oid, repo, "HEAD");
 	if (error_code < 0) error(error_code);
 
+	long long ref_long = 0;
+	for (int i = 0; i < 20; i++) {
+		printf("The char: %d\n", oid.id[i]);
+		ref_long += oid.id[i];
+		ref_long *= 32;
+	}
+
+	char *hex = git_oid_tostr_s(&oid);
+
+	printf("git oid long: %lld\n", ref_long);
+	printf("Hex form: %s\n", hex);
+
 	char shortsha[10] = {0};
 	git_oid_tostr(shortsha, 9, &oid);
 	printf("The short SHA for the HEAD is %s\n\n", shortsha);
@@ -74,7 +86,7 @@ void print_parents(git_commit *commit) {
 	}
 	printf("\n");
 
-	for (unsigned int i = 0; i < count; i++) {
-		print_parents(commits[i]);
-	}
+	// for (unsigned int i = 0; i < count; i++) {
+	// 	print_parents(commits[i]);
+	// }
 }
